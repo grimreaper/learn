@@ -42,3 +42,57 @@ struct Node {
     elem: i32,
     next: Link,
 }
+
+#[cfg(test)]
+mod test {
+    use crate::first::List;
+
+    #[test]
+    fn can_be_constructed() {
+        let _ = List::new;
+    }
+
+    #[test]
+    fn push_value_pops_value() {
+        let mut list = List::new();
+        list.push(1);
+        assert_eq!(list.pop(), Some(1));
+    }
+
+    #[test]
+    fn push_pop_multiple_values() {
+        let mut list = List::new();
+        list.push(1);
+        list.push(2);
+        list.push(3);
+        assert_eq!(list.pop(), Some(3));
+        assert_eq!(list.pop(), Some(2));
+        assert_eq!(list.pop(), Some(1));
+    }
+
+    #[test]
+    fn push_pop_and_repushes() {
+        let mut list = List::new();
+        list.push(1);
+        assert_eq!(list.pop(), Some(1));
+        list.push(2);
+        assert_eq!(list.pop(), Some(2));
+    }
+
+
+    #[test]
+    fn no_push_gets_none() {
+        let mut list = List::new();
+        assert_eq!(list.pop(), None)
+    }
+
+    #[test]
+    fn push_pop_gets_value_and_none_after() {
+        let mut list = List::new();
+        list.push(1);
+        assert_eq!(list.pop(), Some(1));
+        assert_eq!(list.pop(), None)
+    }
+
+
+}
