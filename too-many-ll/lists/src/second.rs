@@ -114,7 +114,7 @@ struct Node<T> {
 
 #[cfg(test)]
 mod test {
-    use crate::second::{List, Iter, IterMut};
+    use super::{List, Iter, IterMut};
 
     #[test]
     fn push_value_pops_value() {

@@ -55,7 +55,7 @@ struct Node {
 
 #[cfg(test)]
 mod test {
-    use crate::first::List;
+    use super::List;
 
     #[test]
     fn can_be_constructed() {
