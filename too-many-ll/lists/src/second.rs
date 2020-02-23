@@ -1,6 +1,9 @@
+
+type Link<T> = Option<Box<Node<T>>>;
+
 #[derive(Debug)]
 pub struct List<T> {
-    head: Option<Box<Node<T>>>,
+    head: Link<T>,
 }
 
 pub struct IntoIter<T>(List<T>);
@@ -95,7 +98,7 @@ impl<'a, T> Iterator for IterMut<'a, T> {
 
 impl<T> Drop for List<T> {
     fn drop(&mut self) {
-        let mut cur_link: Option<Box<Node<T>>> = self.head.take();
+        let mut cur_link: Link<T> = self.head.take();
         while let Some(mut boxed_node) = cur_link {
             cur_link = boxed_node.next.take();
         }
@@ -106,7 +109,7 @@ impl<T> Drop for List<T> {
 #[derive(Debug)]
 struct Node<T> {
     elem: T,
-    next: Option<Box<Node<T>>>,
+    next: Link<T>,
 }
 
 #[cfg(test)]
